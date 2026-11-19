@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Predicción de Ingresos por Ventas</title>
-  <meta name="description" content="Aplicación para predecir ingresos por ventas a partir de la inversión en publicidad (Televisión, Radio, Prensa) mediante un modelo de regresión lineal.">
+  <meta name="description" content="App para predecir ingresos por ventas a partir de la inversión en publicidad (Televisión, Radio, Prensa) mediante un modelo de regresión lineal.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%230f766e'/%3E%3Cpath d='M4 17l5-6 4 3 7-9' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -35,7 +35,7 @@
     <section class="tarjeta formulario">
       <h2>Calcula tus ingresos estimados</h2>
       <p class="ayuda">
-        Ingresá la inversión de cada canal en las <strong>mismas unidades</strong> con las que entrenaste el modelo.
+        Ingresá la inversión de cada canal en <strong>miles de u$d</strong>.
         Podés usar el campo numérico o el deslizador.
       </p>
 
@@ -45,7 +45,7 @@
           <label for="tv">Inversión en Televisión</label>
           <div class="fila-input">
             <input type="number" id="tv" name="tv" min="0" step="any" placeholder="Ej: 150" required>
-            <span class="unidad">u.m.</span>
+            <span class="unidad">miles de u$d</span>
           </div>
           <input type="range" id="tv-rango" min="0" max="300" step="1" value="0" aria-label="Inversión en Televisión">
         </div>
@@ -54,7 +54,7 @@
           <label for="radio">Inversión en Radio</label>
           <div class="fila-input">
             <input type="number" id="radio" name="radio" min="0" step="any" placeholder="Ej: 30" required>
-            <span class="unidad">u.m.</span>
+            <span class="unidad">miles de u$d</span>
           </div>
           <input type="range" id="radio-rango" min="0" max="50" step="0.5" value="0" aria-label="Inversión en Radio">
         </div>
@@ -62,8 +62,8 @@
         <div class="campo">
           <label for="prensa">Inversión en Prensa</label>
           <div class="fila-input">
-            <input type="number" id="prensa" name="prensa" min="0" step="any" placeholder="Ej: 40" required>
-            <span class="unidad">u.m.</span>
+            <input type="number" id="prensa" name="prensa" min="0" step="any" placeholder="Ej: 55" required>
+            <span class="unidad">miles de u$d</span>
           </div>
           <input type="range" id="prensa-rango" min="0" max="120" step="1" value="0" aria-label="Inversión en Prensa">
         </div>

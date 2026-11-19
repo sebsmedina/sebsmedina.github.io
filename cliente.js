@@ -23,7 +23,7 @@ const CAMPOS_SOLICITUD = {
 const TIMEOUT_MS = 120000;
 
 // 5) Unidad con la que se muestran los ingresos en la interfaz.
-const UNIDAD_RESULTADO = "miles de u$d";
+const UNIDAD_RESULTADO = "millones de u$d";
 
 
 // ╔══════════════════════════════╗

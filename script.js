@@ -92,7 +92,7 @@
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     }).format(numero);
-    return formateado + " " + (typeof UNIDAD_RESULTADO !== "undefined" ? UNIDAD_RESULTADO : "millones de u$d");
+    return formateado + " " + (typeof UNIDAD_RESULTADO !== "undefined" ? UNIDAD_RESULTADO : "u.m.");
   }
 
   // ---------- Historial (localStorage) ----------
