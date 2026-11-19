@@ -4,21 +4,14 @@
    que solo tengas que tocar un lugar al desplegar.
    ============================================================ */
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  CONFIGURACIÓN — MODIFICAR ESTOS VALORES AL DESPLEGAR    ║
-// ╚══════════════════════════════════════════════════════════╝
 
 // 1) URL de tu API en Render. SIN barra al final.
-//    Ejemplo: "https://prediccion-ventas-api.onrender.com"
 const API_BASE_URL = "https://seminario-2026-proyecto-integrador-tp.onrender.com";
 
 // 2) Ruta del endpoint de predicción (la que definiste en rutas/prediccion.py).
-//    Ejemplos comunes: "/predecir", "/prediccion", "/api/prediccion", "/predict".
 const ENDPOINT_PREDICCION = "/predecir-ingresos";
 
 // 3) Nombres de los campos que espera tu backend en el cuerpo JSON.
-//    Si tu modelo Pydantic usa otros nombres (ej: "television", "periodico"),
-//    cambialos acá. La clave de la izquierda es interna (no tocar).
 const CAMPOS_SOLICITUD = {
   tv:     "inversion_tv",      // nombre de la clave para Inversión en Televisión
   radio:  "inversion_radio",   // nombre de la clave para Inversión en Radio
@@ -30,24 +23,24 @@ const CAMPOS_SOLICITUD = {
 const TIMEOUT_MS = 120000;
 
 // 5) Unidad con la que se muestran los ingresos en la interfaz.
-const UNIDAD_RESULTADO = "u.m.";
+const UNIDAD_RESULTADO = "miles de u$d";
 
 
-// ╔══════════════════════════════════════════════════════════╗
-// ║  IMPLEMENTACIÓN DEL CLIENTE (no hace falta modificar)    ║
-// ╚══════════════════════════════════════════════════════════╝
+// ╔══════════════════════════════╗
+// ║  IMPLEMENTACIÓN DEL CLIENTE  ║
+// ╚══════════════════════════════╝
 
 class ClientePrediccion {
 
   constructor(baseUrl, endpoint) {
-    this.baseUrl = baseUrl.replace(/\/+$/, ""); // quita barras finales
+    this.baseUrl = baseUrl.replace(/\/+$/, ""); // Quita barras finales
     this.endpoint = endpoint.startsWith("/") ? endpoint : "/" + endpoint;
   }
 
   /**
    * Envía los tres valores de inversión y devuelve la predicción numérica.
    * @param {{tv: number, radio: number, prensa: number}} datos
-   * @returns {Promise<number>} valor predicho de ingresos por ventas
+   * @returns {Promise<number>} Valor predicho de ingresos por ventas
    */
   async predecir(datos) {
     const cuerpo = {};
@@ -69,9 +62,9 @@ class ClientePrediccion {
     } catch (error) {
       clearTimeout(temporizador);
       if (error.name === "AbortError") {
-        throw new Error("El servidor tardó demasiado en responder. Si usás el plan gratuito de Render, esperá unos segundos y volvé a intentar.");
+        throw new Error("El servidor tardó demasiado en responder. Esperá unos segundos y volvé a intentar.");
       }
-      throw new Error("No se pudo conectar con el servidor. Verificá la URL de la API en cliente.js y que el backend esté activo en Render.");
+      throw new Error("No se pudo conectar con el servidor. Verificar la URL de la API en cliente.js o backend activo en Render.");
     }
     clearTimeout(temporizador);
 
@@ -80,7 +73,7 @@ class ClientePrediccion {
       try {
         const errJson = await respuesta.json();
         detalle = errJson.detail ? JSON.stringify(errJson.detail) : "";
-      } catch { /* la respuesta no era JSON */ }
+      } catch { /* La respuesta no era JSON */ }
       throw new Error(
         `El servidor respondió con error ${respuesta.status} (${respuesta.statusText}).` +
         (detalle ? ` Detalle: ${detalle}` : "")
@@ -108,14 +101,14 @@ class ClientePrediccion {
       "predicted_sales", "prediction", "sales"
     ];
 
-    // 1) búsqueda directa en el primer nivel
+    // 1) Búsqueda directa en el primer nivel
     for (const clave of claves) {
       if (typeof datos[clave] === "number" && Number.isFinite(datos[clave])) {
         return datos[clave];
       }
     }
 
-    // 2) si viene dentro de un objeto anidado (data / detalle / resultado)
+    // 2) Si viene dentro de un objeto anidado (data / detalle / resultado)
     for (const contenedor of ["data", "detalle", "resultado", "respuesta"]) {
       if (datos[contenedor] && typeof datos[contenedor] === "object") {
         for (const clave of claves) {
@@ -125,7 +118,7 @@ class ClientePrediccion {
       }
     }
 
-    // 3) último recurso: primer valor numérico finito encontrado
+    // 3) Último recurso: primer valor numérico finito encontrado
     for (const clave of Object.keys(datos)) {
       const v = datos[clave];
       if (typeof v === "number" && Number.isFinite(v)) return v;
@@ -133,7 +126,7 @@ class ClientePrediccion {
 
     throw new Error(
       "No se encontró el valor de la predicción en la respuesta del servidor. " +
-      "Ajustá la función _extraerPrediccion en cliente.js según el formato que devuelve tu API."
+      "Ajustar la función _extraerPrediccion en cliente.js según el formato que devuelve la API."
     );
   }
 

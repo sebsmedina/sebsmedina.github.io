@@ -92,7 +92,7 @@
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     }).format(numero);
-    return formateado + " " + (typeof UNIDAD_RESULTADO !== "undefined" ? UNIDAD_RESULTADO : "u.m.");
+    return formateado + " " + (typeof UNIDAD_RESULTADO !== "undefined" ? UNIDAD_RESULTADO : "millones de u$d");
   }
 
   // ---------- Historial (localStorage) ----------
@@ -163,7 +163,7 @@
 
     establecerCargando(true);
     mostrarMensaje(
-      "Enviando datos al modelo… La primera petición puede tardar hasta 30 segundos (plan gratuito de Render).",
+      "Enviando datos al modelo… La primera petición puede tardar hasta 30 segundos...",
       "info"
     );
 
