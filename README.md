@@ -3,7 +3,7 @@
 
 El frontend y el backend van a estar en dominios distintos, por lo que el navegador va a
 bloquear las peticiones salvo que el backend **permita explícitamente** el origen del
-frontend. Eso se resuelve con **CORS** en FastAPI. Esta guía indica los pasos a seguir
+frontend. Eso se resuelve con **CORS** en FastAPI. Esta guía indica los pasos a seguir.
 
 ---
 
